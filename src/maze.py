@@ -15,13 +15,14 @@ class MazeStates:
     Contains states, rewards for states and moving across the maze.
     """
 
+    # pylint: disable = too-many-arguments
     def __init__(self,
                  states: npt.NDArray[np.int_],
                  rewards: npt.NDArray[np.float_],
                  out_reward: float = -10,
                  terminate_id: int = 0,
                  start_id: int = 0,
-                 current_id: int = -1):  # pylint: disable = too-many-arguments
+                 current_id: int = -1):
         """
         Parameters
         ----------
