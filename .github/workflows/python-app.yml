@@ -5,25 +5,24 @@ name: Python application
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 permissions:
   contents: read
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Install poetry
-      run: pipx install poetry
-    - uses: actions/setup-python@v3
-      with:
-        python-version: '3.8'
-        cache: 'poetry'
-    - run: poetry install
-    - run: poetry run pytest
+      - uses: actions/checkout@v3
+      - name: Install poetry
+        run: pipx install poetry
+      - uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
+          cache: "poetry"
+      - run: poetry install
+      - run: poetry run pytest
