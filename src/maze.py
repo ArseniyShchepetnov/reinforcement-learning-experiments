@@ -1,6 +1,6 @@
 """Maze definition for reinforcement learning experiments."""
 import itertools
-from typing import Optional, Sequence, Tuple, Union
+from typing import Optional, Sequence, Union
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -21,7 +21,7 @@ class MazeStates:
                  out_reward: float = -10,
                  terminate_id: int = 0,
                  start_id: int = 0,
-                 current_id: int = -1):
+                 current_id: int = -1):  # pylint: disable = too-many-arguments
         """
         Parameters
         ----------
@@ -198,15 +198,16 @@ class MazePolicy:
 
         self.actions = actions
         self.probs = probs
-        self._random = np.random.RandomState(seed=seed)
+        self._generator = np.random.default_rng(seed=seed)
 
     def sample_action_id(self, state_id: int) -> int:
         """Sample action return id."""
-        return self._random.choice(len(self.actions), p=self.probs[state_id])
+        return self._generator.choice(len(self.actions),
+                                      p=self.probs[state_id])
 
     def sample_action(self, state_id: int) -> npt.NDArray[np.int_]:
         """Sample action for move."""
-        id_ = self._random.choice(len(self.actions), p=self.probs[state_id])
+        id_ = self.sample_action_id(state_id)
         return self.get_action(id_)
 
     def get_action(self, id_: int) -> npt.NDArray[np.int_]:
@@ -225,7 +226,7 @@ class MazePolicy:
         return np.arange(self.actions.shape[0])
 
 
-class MazeEpisode:
+class MazeEpisode:  # pylint: disable = too-few-public-methods
     """Episode container."""
 
     def __init__(self, states, actions, rewards):
