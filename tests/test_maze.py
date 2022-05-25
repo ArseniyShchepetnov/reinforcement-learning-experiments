@@ -1,6 +1,6 @@
 """Test maze."""
-from src.maze import MazeStates, MazePolicy
 import numpy as np
+from src.maze import MazePolicy, MazeStates
 
 
 def test_states_default():
