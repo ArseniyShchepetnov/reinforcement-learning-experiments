@@ -5,6 +5,7 @@ from typing import Optional, Sequence, Tuple, Union
 import matplotlib.pyplot as plt
 import numpy as np
 import numpy.typing as npt
+from matplotlib.collections import QuadMesh
 
 
 class MazeStates:
@@ -156,7 +157,7 @@ class MazeStates:
         """Return closest id to the possible state position."""
         return int(np.argmin(np.linalg.norm(self.states - state, axis=1)))
 
-    def plot_rewards(self, **kwargs):
+    def plot_rewards(self, **kwargs) -> QuadMesh:
         """Plot rewards map."""
         shape = (np.max(self.states[:, 0]), np.max(self.states[:, 1]))
         field = np.empty(shape=shape)
@@ -166,7 +167,7 @@ class MazeStates:
             field[pos[0], pos[1]] = self.get_reward(id_)
         return plt.pcolormesh(self.rewards, **kwargs)
 
-    def plot_states_values(self, values: np.ndarray, **kwargs) -> plt.QuadMesh:
+    def plot_states_values(self, values: np.ndarray, **kwargs) -> QuadMesh:
         """Plot values of some map."""
         shape = (np.max(self.states[:, 0] + 1), np.max(self.states[:, 1] + 1))
         field = np.empty(shape=shape)
