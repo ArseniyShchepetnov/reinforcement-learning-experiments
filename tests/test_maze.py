@@ -5,10 +5,10 @@ import numpy as np
 
 def test_states_default():
     """Check maze is instantiated correctly."""
-    states = [[0, 0],
-              [1, 0],
-              [0, 1],
-              [1, 1]]
+    states = np.array([[0, 0],
+                       [1, 0],
+                       [0, 1],
+                       [1, 1]])
 
     rewards = [1, 2, 3, 4]
 
