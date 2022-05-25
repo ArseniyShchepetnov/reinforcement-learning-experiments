@@ -26,3 +26,5 @@ jobs:
           cache: "poetry"
       - run: poetry install
       - run: poetry run pytest
+      - run: poetry run pylint src --fail-under=10
+      - run: poetry run pylint tests --fail-under=10
